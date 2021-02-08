@@ -31,6 +31,8 @@
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "^3.8.3",
@@ -61,7 +63,7 @@
     }
   },
   "lint-staged": {
-    "src/*.{js,ts,tsx}": "eslint --cache --fix",
+    "src/*.{js,ts,tsx}": "eslint --fix",
     "src/*.{js,ts,tsx,css,scss,md}": "prettier --write"
   }
 }
