@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-
 module.exports = {
   entry: {
     app: "./src/index.tsx",
@@ -29,15 +28,37 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "postcss-preset-env",
+                    {
+                      // Options
+                      stage: 0,
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
       },
       {
-        test: /\.scss$/,
-        exclude: /\.module\.scss$/,
+        test: /\.module\.css$/i,
         use: [
-          {
-            loader: "style-loader",
-          },
+          "style-loader",
           {
             loader: "css-loader",
             options: {
@@ -48,35 +69,25 @@ module.exports = {
             },
           },
           {
-            loader: "sass-loader",
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "postcss-preset-env",
+                    {
+                      stage: 0,
+                    },
+                  ],
+                ],
+              },
+            },
           },
         ],
       },
       {
-        test: /\.module\.scss$/,
-        use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                compileType: "module",
-              },
-            },
-          },
-          {
-            loader: "sass-loader",
-          },
-          {
-            loader: "sass-resources-loader",
-            options: {
-              resources: "src/styles/shared/*.scss",
-            },
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        type: "asset",
       },
     ],
   },
