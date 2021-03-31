@@ -54,15 +54,8 @@ const AuthenticatedRoutes: RouteProps[] = [
   },
 ];
 
-const AuthenticatedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={() => {
-        return <div>{children}</div>;
-      }}
-    />
-  );
+const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
+  return <Route {...rest} component={component} />;
 };
 
 const AppRoutes = () => {
