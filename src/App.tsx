@@ -5,26 +5,21 @@ import {
   Switch,
   Link,
   RouteProps,
+  Redirect,
 } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { RequestProvider } from "./context/RequestContext";
+import { Dashboard } from "./pages/Dashboard";
 
-const Home: React.FC = () => {
-  return (
-    <div>
-      Home
-      <Link to="/login">Login</Link>
-    </div>
-  );
-};
+import { Home } from "./pages/Home";
+import { RequestWrapper } from "./components/RequestWrapper";
+
 const Login: React.FC = () => {
   return (
     <div>
       <Link to="/dashboard">Dashboard</Link>
     </div>
   );
-};
-
-const Dashboard: React.FC = () => {
-  return <div>Dashboard</div>;
 };
 
 const NotFound: React.FC = () => {
@@ -54,22 +49,28 @@ const AuthenticatedRoutes: RouteProps[] = [
   },
 ];
 
-const AuthenticatedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
+const AuthenticatedRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
+  const { isAuthenticated } = useAuth0();
+  const renderRedicrect = () => {
+    return <Redirect to="/" />;
+  };
   return (
     <Route
       {...rest}
-      render={() => {
-        return <div>{children}</div>;
-      }}
+      component={isAuthenticated ? component : renderRedicrect}
     />
   );
 };
 
 const AppRoutes = () => {
+  const { isLoading } = useAuth0();
+  if (isLoading) {
+    return <div>Load中...</div>;
+  }
   return (
     <Switch>
       {AuthenticatedRoutes.map((route, index) => (
-        <AuthenticatedRoute {...route} key={index} />
+        <AuthenticatedRoute key={index} {...route} />
       ))}
       {UnauthenticatedRoutes.map((route, index) => (
         <Route key={index} {...route} />
@@ -78,10 +79,13 @@ const AppRoutes = () => {
   );
 };
 
-export const App: React.FC = () => {
+const BaseApp: React.FC = () => {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <RequestProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </RequestProvider>
   );
 };
+export const App = RequestWrapper(BaseApp);
