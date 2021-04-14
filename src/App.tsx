@@ -81,11 +81,9 @@ const AppRoutes = () => {
 
 const BaseApp: React.FC = () => {
   return (
-    <RequestProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </RequestProvider>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
 };
 export const App = RequestWrapper(BaseApp);
