@@ -1,0 +1,24 @@
+.layout {
+  background-color: var(--main-bg);
+  min-height: 100vh;
+}
+
+.aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  overflow-y: scroll;
+  border-right: 1px solid var(--border-color);
+}
+
+.main {
+  margin-left: var(--sidebar-width);
+  padding: var(--space-10x) var(--space-4x);
+}
+
+.title {
+  font-size: 16px;
+  margin: var(--space-2x) 0 var(--space-4x);
+}

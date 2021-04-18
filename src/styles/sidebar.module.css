@@ -1,0 +1,29 @@
+.sidebar {
+}
+
+.sidebarNav {
+  padding: var(--space-10x) 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebarNavItem {
+  height: 36px;
+}
+
+.sidebarNavItemLink {
+  padding: 0 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebarNavItemLink:hover {
+  background-color: #ccc;
+}
+
+.sidebarNavItemLink {
+  text-decoration: none;
+}

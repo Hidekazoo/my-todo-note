@@ -1,0 +1,24 @@
+:root {
+  --text-primary: #222326;
+  --text-secondary: #424242;
+
+  --sidebar-width: 230px;
+
+  --space-1x: 4px;
+  --space-2x: 8px;
+  --space-3x: 12px;
+  --space-4x: 16px;
+  --space-5x: 20px;
+  --space-6x: 24px;
+  --space-7x: 28px;
+  --space-8x: 32px;
+  --space-9x: 36px;
+  --space-10x: 40px;
+
+  --border-color: #dadce0;
+
+  --main-bg: #fafbfc;
+
+  --primary: #1473e6;
+  --blue: #026aa7;
+}
